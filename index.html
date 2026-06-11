@@ -23,11 +23,11 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
-            height: 100vh;
+            height: 75vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
+            
             padding: 24px;
             overflow: hidden;
         }
@@ -81,8 +81,8 @@
         }
 
         .flag-icon {
-            width: 67px;
-            height: 45px;
+            width: 40px;
+            height: 25px;
             object-fit: cover;
             border-radius: 4px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -90,7 +90,7 @@
         }
 
         .country-name {
-            font-size: 50px;
+            font-size: 40px;
             font-weight: 700;
             color: #1a202c;
             letter-spacing: -0.3px;
@@ -98,7 +98,7 @@
 
         /* Digital Clock Wrapper Styles */
         .time-display {
-            font-size: 50px;
+            font-size: 40px;
             font-weight: 800;
             color: var(--bg-dark);
             font-variant-numeric: tabular-nums;
@@ -119,24 +119,19 @@
 </head>
 <body>
 
-    <div class="dashboard-header">
-        <h1>Global Operations Time Tracker</h1>
-        <p>Real-Time Synchronized Networks</p>
-    </div>
-
     <div class="clock-grid">
         
         <div class="clock-card" data-timezone="Europe/London">
             <div class="country-meta">
-                <img class="flag-icon" src="https://flagcdn.com/w80/gb.png" alt="UK Flag"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="country-name">United Kingdom</span>
+                <img class="flag-icon" src="https://flagcdn.com/w80/gb.png" alt="UK Flag"> &nbsp;
+                <span class="country-name">UK</span>
             </div>
             <div class="time-display">--:--</div>
         </div>
 
         <div class="clock-card" data-timezone="Asia/Beirut">
             <div class="country-meta">
-                <img class="flag-icon" src="https://flagcdn.com/w80/lb.png" alt="Lebanon Flag"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img class="flag-icon" src="https://flagcdn.com/w80/lb.png" alt="Lebanon Flag"> &nbsp;
                 <span class="country-name">Lebanon</span>
             </div>
             <div class="time-display">--:--</div>
@@ -144,15 +139,15 @@
 
         <div class="clock-card" data-timezone="Asia/Riyadh">
             <div class="country-meta">
-                <img class="flag-icon" src="https://flagcdn.com/w80/sa.png" alt="KSA Flag"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="country-name">Saudi Arabia</span>
+                <img class="flag-icon" src="https://flagcdn.com/w80/sa.png" alt="KSA Flag"> &nbsp;
+                <span class="country-name">KSA</span>
             </div>
             <div class="time-display">--:--</div>
         </div>
 
         <div class="clock-card" data-timezone="Asia/Dubai">
             <div class="country-meta">
-                <img class="flag-icon" src="https://flagcdn.com/w80/ae.png" alt="UAE Flag"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img class="flag-icon" src="https://flagcdn.com/w80/ae.png" alt="UAE Flag"> &nbsp;
                 <span class="country-name">UAE</span>
             </div>
             <div class="time-display">--:--</div>
@@ -160,7 +155,7 @@
 
         <div class="clock-card" data-timezone="Asia/Qatar">
             <div class="country-meta">
-                <img class="flag-icon" src="https://flagcdn.com/w80/qa.png" alt="Qatar Flag"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img class="flag-icon" src="https://flagcdn.com/w80/qa.png" alt="Qatar Flag"> &nbsp;
                 <span class="country-name">Qatar</span>
             </div>
             <div class="time-display">--:--</div>
