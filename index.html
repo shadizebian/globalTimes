@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Operations Time Zone Dashboard</title>
+    <style>
+        :root {
+            --bg-dark: #003955;
+            --card-bg: #ffffff;
+            --text-main: #2d3748;
+            --accent-green: #37BA8D;
+            --border-light: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            overflow: hidden;
+        }
+
+        .dashboard-header {
+            color: #ffffff;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .dashboard-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .dashboard-header p {
+            font-size: 13px;
+            color: #cbd5e0;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 3 Rows x 2 Columns Grid Layout */
+        .clock-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 16px;
+            width: 100%;
+            max-width: 1200px;
+            height: 60vh;
+        }
+
+        .clock-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            padding: 10px 32px;
+            display: flex;
+            flex-direction: column; /* Stacks children vertically */
+            align-items: flex-start; /* Aligns all content to the left side */
+            justify-content: center;
+            border-left: 5px solid var(--accent-green);
+        }
+
+        .country-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 8px; /* Pushes the time display cleanly underneath */
+        }
+
+        .flag-icon {
+            width: 67px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-light);
+        }
+
+        .country-name {
+            font-size: 50px;
+            font-weight: 700;
+            color: #1a202c;
+            letter-spacing: -0.3px;
+        }
+
+        /* Digital Clock Display - Anchored under country name */
+        .time-display {
+            font-size: 50px;
+            font-weight: 800;
+            color: var(--bg-dark);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -1.5px;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            line-height: 1.1;
+        }
+
+        .ampm-marker {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-header">
+        <h1>Global Operations Time Tracker</h1>
+        <p>Real-Time Synchronized Networks</p>
+    </div>
+
+    <div class="clock-grid">
+        
+        <div class="clock-card" data-timezone="Europe/London">
+            <div class="country-meta">
+                <img class="flag-icon" src="https://flagcdn.com/w80/gb.png" alt="UK Flag">
+                <span class="country-name">United Kingdom</span>
+            </div>
+            <div class="time-display">--:--</div>
+        </div>
+
+        <div class="clock-card" data-timezone="Asia/Beirut">
+            <div class="country-meta">
+                <img class="flag-icon" src="https://flagcdn.com/w80/lb.png" alt="Lebanon Flag">
+                <span class="country-name">Lebanon</span>
+            </div>
+            <div class="time-display">--:--</div>
+        </div>
+
+        <div class="clock-card" data-timezone="Asia/Riyadh">
+            <div class="country-meta">
+                <img class="flag-icon" src="https://flagcdn.com/w80/sa.png" alt="KSA Flag">
+                <span class="country-name">Saudi Arabia</span>
+            </div>
+            <div class="time-display">--:--</div>
+        </div>
+
+        <div class="clock-card" data-timezone="Asia/Dubai">
+            <div class="country-meta">
+                <img class="flag-icon" src="https://flagcdn.com/w80/ae.png" alt="UAE Flag">
+                <span class="country-name">UAE</span>
+            </div>
+            <div class="time-display">--:--</div>
+        </div>
+
+        <div class="clock-card" data-timezone="Asia/Qatar">
+            <div class="country-meta">
+                <img class="flag-icon" src="https://flagcdn.com/w80/qa.png" alt="Qatar Flag">
+                <span class="country-name">Qatar</span>
+            </div>
+            <div class="time-display">--:--</div>
+        </div>
+
+        <div class="clock-card" data-timezone="Asia/Kolkata">
+            <div class="country-meta">
+                <img class="flag-icon" src="https://flagcdn.com/w80/in.png" alt="India Flag">
+                <span class="country-name">India</span>
+            </div>
+            <div class="time-display">--:--</div>
+        </div>
+
+    </div>
+
+    <script>
+        function updateDashboardClocks() {
+            const clockCards = document.querySelectorAll('.clock-card');
+            
+            clockCards.forEach(card => {
+                const targetTimezone = card.getAttribute('data-timezone');
+                const timeDisplayElement = card.querySelector('.time-display');
+                
+                try {
+                    const formatter = new Intl.DateTimeFormat('en-US', {
+                        timeZone: targetTimezone,
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    });
+                    
+                    const formattedString = formatter.format(new Date()); 
+                    const [timeString, ampm] = formattedString.split(' ');
+                    
+                    timeDisplayElement.innerHTML = `${timeString}<span class="ampm-marker">${ampm}</span>`;
+                } catch (error) {
+                    console.error(`Error processing time parameters for ${targetTimezone}:`, error);
+                }
+            });
+        }
+
+        updateDashboardClocks();
+
+        const currentSeconds = new Date().getSeconds();
+        const initialDelayMs = (60 - currentSeconds) * 1000;
+
+        setTimeout(() => {
+            updateDashboardClocks();
+            setInterval(updateDashboardClocks, 60000);
+        }, initialDelayMs);
+    </script>
+</body>
+</html>
