@@ -23,7 +23,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
-            height: 200vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -59,19 +59,18 @@
             grid-template-rows: repeat(3, 1fr);
             gap: 16px;
             width: 100%;
-            max-width: 1200px;
-            height: 60vh;
+            max-width: 950px;
+            height: 175vh;
         }
 
         .clock-card {
             background-color: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            padding: 10px 32px;
+            padding: 16px 32px;
             display: flex;
-            flex-direction: column; /* Stacks children vertically */
-            align-items: flex-start; /* Aligns all content to the left side */
-            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
             border-left: 5px solid var(--accent-green);
         }
 
@@ -79,7 +78,6 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 8px; /* Pushes the time display cleanly underneath */
         }
 
         .flag-icon {
@@ -98,19 +96,19 @@
             letter-spacing: -0.3px;
         }
 
-        /* Digital Clock Display - Anchored under country name */
+        /* Digital Clock Wrapper Styles */
         .time-display {
             font-size: 50px;
             font-weight: 800;
             color: var(--bg-dark);
             font-variant-numeric: tabular-nums;
-            letter-spacing: -1.5px;
+            letter-spacing: -1px;
             display: flex;
             align-items: baseline;
             gap: 6px;
-            line-height: 1.1;
         }
 
+        /* Scaled formatting specifically for the AM/PM design marker */
         .ampm-marker {
             font-size: 18px;
             font-weight: 600;
@@ -130,7 +128,7 @@
         
         <div class="clock-card" data-timezone="Europe/London">
             <div class="country-meta">
-                <img class="flag-icon" src="https://flagcdn.com/w80/gb.png" alt="UK Flag">
+                <img class="flag-icon" src="https://flagcdn.com/w80/gb.png" alt="UK Flag"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="country-name">United Kingdom</span>
             </div>
             <div class="time-display">--:--</div>
@@ -138,7 +136,7 @@
 
         <div class="clock-card" data-timezone="Asia/Beirut">
             <div class="country-meta">
-                <img class="flag-icon" src="https://flagcdn.com/w80/lb.png" alt="Lebanon Flag">
+                <img class="flag-icon" src="https://flagcdn.com/w80/lb.png" alt="Lebanon Flag"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="country-name">Lebanon</span>
             </div>
             <div class="time-display">--:--</div>
@@ -146,7 +144,7 @@
 
         <div class="clock-card" data-timezone="Asia/Riyadh">
             <div class="country-meta">
-                <img class="flag-icon" src="https://flagcdn.com/w80/sa.png" alt="KSA Flag">
+                <img class="flag-icon" src="https://flagcdn.com/w80/sa.png" alt="KSA Flag"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="country-name">Saudi Arabia</span>
             </div>
             <div class="time-display">--:--</div>
@@ -154,7 +152,7 @@
 
         <div class="clock-card" data-timezone="Asia/Dubai">
             <div class="country-meta">
-                <img class="flag-icon" src="https://flagcdn.com/w80/ae.png" alt="UAE Flag">
+                <img class="flag-icon" src="https://flagcdn.com/w80/ae.png" alt="UAE Flag"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="country-name">UAE</span>
             </div>
             <div class="time-display">--:--</div>
@@ -162,7 +160,7 @@
 
         <div class="clock-card" data-timezone="Asia/Qatar">
             <div class="country-meta">
-                <img class="flag-icon" src="https://flagcdn.com/w80/qa.png" alt="Qatar Flag">
+                <img class="flag-icon" src="https://flagcdn.com/w80/qa.png" alt="Qatar Flag"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="country-name">Qatar</span>
             </div>
             <div class="time-display">--:--</div>
@@ -170,7 +168,7 @@
 
         <div class="clock-card" data-timezone="Asia/Kolkata">
             <div class="country-meta">
-                <img class="flag-icon" src="https://flagcdn.com/w80/in.png" alt="India Flag">
+                <img class="flag-icon" src="https://flagcdn.com/w80/in.png" alt="India Flag"> 
                 <span class="country-name">India</span>
             </div>
             <div class="time-display">--:--</div>
@@ -187,6 +185,7 @@
                 const timeDisplayElement = card.querySelector('.time-display');
                 
                 try {
+                    // Hour12 forces formatting strings to partition out AM/PM tags automatically
                     const formatter = new Intl.DateTimeFormat('en-US', {
                         timeZone: targetTimezone,
                         hour: '2-digit',
@@ -195,6 +194,8 @@
                     });
                     
                     const formattedString = formatter.format(new Date()); 
+                    
+                    // Parsing strings ("10:45 AM" -> "10:45" and "AM") to style elements cleanly
                     const [timeString, ampm] = formattedString.split(' ');
                     
                     timeDisplayElement.innerHTML = `${timeString}<span class="ampm-marker">${ampm}</span>`;
